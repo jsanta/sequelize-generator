@@ -1,5 +1,5 @@
 {
-  "name": "sequelize-generator",
+  "name": "sequelize-generator-schematic",
   "version": "1.0.0",
   "description": "Sequelize entity model generator.",
   "scripts": {
@@ -7,10 +7,19 @@
     "test": "npm run build && jasmine src/**/*_spec.js"
   },
   "keywords": [
-    "schematics"
+    "schematics",
+    "sequelize",
+    "ORM",
+    "TypeScript",
+    "entity model",
+    "code generator"
   ],
-  "author": "",
+  "author": "Jose Ignacio Santa Cruz G <j@santa.cl> (http://santa.cl/)",
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/jsanta/sequelize-generator"
+  },
   "schematics": "./src/collection.json",
   "dependencies": {
     "@angular-devkit/core": "^9.1.1",
