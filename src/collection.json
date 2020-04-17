@@ -1,0 +1,10 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "sequelize-generator": {
+      "description": "Sequelize entity model generator.",
+      "factory": "./sequelize-generator/index#sequelizeGenerator",
+      "schema": "./sequelize-generator/schema.json"
+    }
+  }
+}
