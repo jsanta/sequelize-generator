@@ -1,0 +1,26 @@
+{
+  "name": "sequelize-generator",
+  "version": "1.0.0",
+  "description": "Sequelize entity model generator.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && jasmine src/**/*_spec.js"
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^9.1.1",
+    "@angular-devkit/schematics": "^9.1.1",
+    "@angular/cli": "^9.1.1",
+    "typescript": "~3.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.11.1",
+    "@types/jasmine": "~3.5.0",
+    "jasmine": "^3.5.0"
+  }
+}
