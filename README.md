@@ -1,28 +1,38 @@
-# Getting Started With Schematics
+# Sequelize Generator Schematic
 
-This repository is a basic Schematic implementation that serves as a starting point to create and publish Schematics to NPM.
+Aimed to make code generation a little simpler, this command line tool 
+generates Typescript code for Sequelize entity model classes.
+It doesn't generate all the desired table structure, but most of the code
+required to make nice database models based on some copy & pasting process.
 
-### Testing
+## Installation
 
-To test locally, install `@angular-devkit/schematics-cli` globally and use the `schematics` command line tool. That tool acts the same as the `generate` command of the Angular CLI, but also has a debug mode.
-
-Check the documentation with
-```bash
-schematics --help
+### From cloning the repo
+Execute:
 ```
-
-### Unit Testing
-
-`npm run test` will run the unit tests, using Jasmine as a runner and test framework.
-
-### Publishing
-
-To publish, simply do:
-
-```bash
+git clone git@github.com:jsanta/sequelize-generator.git
+cd sequelize-generator
+npm install
 npm run build
-npm publish
+cd <your project folder>
+npm link <sequelize-generator folder>
 ```
 
-That's it!
- 
+### From NPM
+
+Execute:
+
+``npm i sequelize-generator-schematic``
+
+## Usage
+
+From the command line, execute:
+
+``ng g sequelize-generator:sequelize-generator --project=<project_name> <path> --flat --schema=<the database schema for the table>``
+
+### Parameter explanation:
+
+* *--project=* : receives the project name, for example if you are working on a monorepo, or have multiple projects defined on your angular json. This is optional and if not defined it will take the first project it find on the angular.json file
+* *<path>* : should be the relative path where you want the model file to be generated. The schematic will take the file name and use it as the ClassName, modelName and table_name.
+* *--flat* : No other folders will be created to contain the file.
+* *--schema=* : Database schema for the table. Defaults to *public*
