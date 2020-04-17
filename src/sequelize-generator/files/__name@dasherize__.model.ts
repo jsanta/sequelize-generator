@@ -131,7 +131,7 @@ export class <%= classify(name) %> extends Model {
     });
     ManyTableObject.belongsTo(<%= classify(name) %>, { // CHANGE ME!
       foreignKey: '<%= underscore(name) %>_id',
-      as        : '<%= classify(name) %>_alias'  // CHANGE ME!
+      as        : '<%= underscore(name) %>'  
     });
 
     // One to one relations
@@ -146,7 +146,7 @@ export class <%= classify(name) %> extends Model {
     // therefore a many to many relation between both tables)
     <%= classify(name) %>.belongsToMany(ManyManyTable, { // CHANGE ME!
       through   : 'through_table_name',            // CHANGE ME!
-      as        : '<%= classify(name) %>_alias',   // CHANGE ME!
+      as        : '<%= underscore(name) %>',   // CHANGE ME!
       foreignKey: '<%= underscore(name) %>_id',
       otherKey  : 'ManyManyTable_id',              // CHANGE ME!
     });
