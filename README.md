@@ -28,11 +28,11 @@ Execute:
 
 From the command line, execute:
 
-``ng g sequelize-generator:sequelize-generator --project=<project_name> <path> --flat --schema=<the database schema for the table>``
+``ng g sequelize-generator-schematic:sequelize-generator --project=<project_name> <path> --flat --schema=<the database schema for the table>``
 
 ### Parameter explanation:
 
-* *--project=* : receives the project name, for example if you are working on a monorepo, or have multiple projects defined on your angular json. This is optional and if not defined it will take the first project it find on the angular.json file
-* *<path>* : should be the relative path where you want the model file to be generated. The schematic will take the file name and use it as the ClassName, modelName and table_name.
+* *--project=< project >* : receives the project name, for example if you are working on a monorepo, or have multiple projects defined on your angular json. This is optional and if not defined it will take the first project it find on the angular.json file
+* *< path >* : should be the relative path where you want the model file to be generated. The schematic will take the file name and use it as the ClassName, modelName and table_name.
 * *--flat* : No other folders will be created to contain the file.
-* *--schema=* : Database schema for the table. Defaults to *public*
+* *--schema=< schema >* : Database schema for the table. Defaults to *public*

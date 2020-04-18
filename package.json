@@ -1,6 +1,6 @@
 {
   "name": "sequelize-generator-schematic",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sequelize entity model generator.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -17,8 +17,8 @@
   "author": "Jose Ignacio Santa Cruz G <j@santa.cl> (http://santa.cl/)",
   "license": "MIT",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/jsanta/sequelize-generator"
+    "type": "git",
+    "url": "https://github.com/jsanta/sequelize-generator"
   },
   "schematics": "./src/collection.json",
   "dependencies": {
