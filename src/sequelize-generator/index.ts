@@ -55,7 +55,7 @@ export function sequelizeGenerator(options: any): Rule {
             normalize(options.path + '/' + strings.dasherize(options.name));
 
         const templateSource = apply(url('./files'), [
-            options.spec ? noop() : filter(path => !path.endsWith('.spec.ts')),
+            options.spec ? noop() : filter(path => !path.endsWith('.spec.ts') && path.endsWith('.model.ts')),
             template({
                 ...options,
                 ...strings,
