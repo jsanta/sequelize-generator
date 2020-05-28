@@ -39,12 +39,17 @@ const _<%= classify(name) %>Def: ModelAttributes = {
   },
   name: {
     type   : DataTypes.STRING(150),
-    comment: 'Nombre para identificar el registro.'
+    comment: 'Nombre para identificar el registro'
   },
   displayName: {
     type   : DataTypes.STRING(300),
     field  : 'display_name',
     comment: 'Nombre a ser desplegado en las pantallas'
+  },
+  isActive: {
+    type   : DataTypes.BOOLEAN,
+    field  : 'is_active',
+    comment: 'true si el registro se considera en estado activo/disponible/operativo, false en caso contrario'
   },
   // Include other fields here
   createdAt: {
@@ -75,10 +80,22 @@ const indexes: IndexesOptions[] = [
 ];
 
 /**
+ * Interfaz del modelo con todos los atributos "no sequelize".
+ * Es utilizada para la generación de clases de tipo para poder ser utilizadas tanto
+ * en el FrontEnd como el el BackEnd.
+ */
+export interface I<%= classify(name) %> {
+  id          : number;
+  name ?      : string;
+  displayName?: string;
+  isActive?   : boolean;
+}
+
+/**
  * La tabla <%= underscore(name) %> tiene por objetivo el almacenamiento de 
  * registros --incluya una descripcion util en esta seccion, incluyndo lógica de negocios--
  */
-export class <%= classify(name) %> extends Model {
+export class <%= classify(name) %> extends Model implements I<%= classify(name) %> {
   public static associations: {
     // One to many
     manyTables: Association<<%= classify(name) %>, ManyTable>;
@@ -115,6 +132,7 @@ export class <%= classify(name) %> extends Model {
   public id           : number;
   public name        ?: string | null;
   public displayName ?: string | null;
+  public isActive    ?: boolean | null;
   // Other fields
 
   public readonly createdAt! : Date;
