@@ -1,4 +1,5 @@
 # Ignores TypeScript files, but keeps definitions.
 *.ts
 !*.d.ts
-!__*__.model.ts
+!**/files/__*__.model.ts
+!**/files/T*.ts
