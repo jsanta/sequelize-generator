@@ -4,7 +4,7 @@ import { autoImplement } from '../utils'; // Requires extra utils module for add
 
 // Declares a type so all interface properties are optional
 // Ref https://stackoverflow.com/questions/54986332/typescript-class-extending-partial-interface
-type Optional<%= classify(name) %> = Partial < I <%= classify(name) %>>;
+type Optional<%= classify(name) %> = Partial<I<%= classify(name) %>>;
 
 /**
  * This type class is meant to be used 
