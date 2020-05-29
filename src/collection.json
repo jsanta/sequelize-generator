@@ -5,6 +5,11 @@
       "description": "Sequelize entity model generator.",
       "factory": "./sequelize-generator/index#sequelizeGenerator",
       "schema": "./sequelize-generator/schema.json"
+    },
+    "entitytype-generator": {
+      "description": "Type generator for sequelize-less class types based on a Sequelize model.",
+      "factory": "./entitytype-generator/index#entityTypeGenerator",
+      "schema": "./entitytype-generator/schema.json"
     }
   }
 }

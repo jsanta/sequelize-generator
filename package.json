@@ -1,6 +1,6 @@
 {
   "name": "sequelize-generator-schematic",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Sequelize entity model generator.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -25,7 +25,9 @@
     "@angular-devkit/core": "^9.1.1",
     "@angular-devkit/schematics": "^9.1.1",
     "@angular/cli": "^9.1.1",
-    "typescript": "~3.8.2"
+    "ajv": "^6.12.2",
+    "typescript": "~3.8.2",
+    "typescript-json-schema": "^0.42.0"
   },
   "devDependencies": {
     "@types/node": "^12.11.1",

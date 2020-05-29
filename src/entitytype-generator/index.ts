@@ -45,17 +45,16 @@ export function setupOptions(host: Tree, options: any): Tree {
     return host;
 }
 
-
-export function sequelizeGenerator(options: any): Rule {
+export function entityTypeGenerator(options: any): Rule {
     return (tree: Tree, _context: SchematicContext) => {
         setupOptions(tree, options);
 
         const movePath = (options.flat) ?
             normalize(options.path) :
-            normalize(options.path + '/' + strings.dasherize(options.name));
+            normalize(options.path + '/' + strings.classify(options.name));
 
         const templateSource = apply(url('./files'), [
-            options.spec ? noop() : filter(path => !path.endsWith('.spec.ts') && path.endsWith('.model.ts')),
+            options.spec ? noop() : filter(path => !path.endsWith('.spec.ts') && path.startsWith('T') && path.endsWith('.ts')),
             template({
                 ...options,
                 ...strings,
