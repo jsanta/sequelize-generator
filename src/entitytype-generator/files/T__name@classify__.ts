@@ -7,7 +7,7 @@ import { autoImplement } from '../utils'; // Requires extra utils module for add
 type Optional<%= classify(name) %> = Partial<I<%= classify(name) %>>;
 
 /**
- * This type class is meant to be used 
+ * This type class is meant to be used in both frontend and backend because it doesn't depend on sequelize 
  */
 export class T<%= classify(name) %> extends autoImplement<Optional<%= classify(name) %>>() {
   // Validator is static and declared as any to be initialized from any other place
