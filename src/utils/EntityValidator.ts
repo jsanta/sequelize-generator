@@ -1,9 +1,8 @@
 import { resolve } from 'path';
-
 // For this validator to be useful
 // run `npm install --save ajv typescript-json-schema`
 import * as TJS from 'typescript-json-schema';
-import * as Ajv from 'ajv';
+import Ajv from 'ajv';
 
 /**
  * Validates a JSON object against a generated JSON Schema.
@@ -15,15 +14,16 @@ import * as Ajv from 'ajv';
 export class EntityValidator {
   // As the schema loading is a 'expensive' task, it must be run only once
   // and stores each schema as a key: value pair
-  schemaCache: { [schemaObj: string]: any } = {}
+  schemaCache: { [schemaObj: string]: TJS.Definition | null } = {}
   
   /**
-   * Loads the json schema and places it on the schemaCache Array
+   * Loads the json schema and places it on the schemaCache Array.
+   * This operation is done asynchronously, so it returns a Promise
    * @param schemaKey String used as a search key for the json-schema
    * @param filePath Path to the typescrit file used to extract the interface object
    * @param typeName Interface object name (eg IModelObj, where ModelObj is the sequelize Model class)
    */
-  loadSchema(schemaKey: string, filePath: string, typeName: string) {
+  asyncLoadSchema(schemaKey: string, filePath: string, typeName: string): Promise<{ schemaKey: string, schema: TJS.Definition | null }> {
     // All attributes are considered as optional
     // No extra/additional attributes are allowed
     const settings: TJS.PartialArgs = {
@@ -36,10 +36,51 @@ export class EntityValidator {
       noExtraProps: true,
       ignoreErrors: false
     };
-    const tsProgram = TJS.getProgramFromFiles([resolve(filePath)], compilerOptions);
+    // return Promise.resolve('Dummy resolve');
+    return new Promise<{ schemaKey: string, schema: TJS.Definition | null }>(
+      (_resolve, _reject) => {
+        try {
+          const tsProgram: TJS.Program        = TJS.getProgramFromFiles([resolve(filePath)], compilerOptions);
+          const schema: TJS.Definition | null = TJS.generateSchema(tsProgram, typeName, settings);
 
-    this.schemaCache[schemaKey] = TJS.generateSchema(tsProgram, typeName, settings);
-    return this.schemaCache[schemaKey];
+          _resolve({ schemaKey, schema });
+        } catch (pErr) {
+          _reject(pErr);
+        }
+      }
+    );
+
+  }
+
+  /**
+   * Loads the json schema and places it on the schemaCache Array
+   * @param schemaKey String used as a search key for the json-schema
+   * @param filePath Path to the typescrit file used to extract the interface object
+   * @param typeName Interface object name (eg IModelObj, where ModelObj is the sequelize Model class)
+   */
+  syncLoadSchema(schemaKey: string, filePath: string, typeName: string): TJS.Definition | null {
+    // All attributes are considered as optional
+    // No extra/additional attributes are allowed
+    const settings: TJS.PartialArgs = {
+      required: false,
+      noExtraProps: true,
+      ignoreErrors: false
+    };
+    const compilerOptions: TJS.CompilerOptions = {
+      strictNullChecks: true,
+      noExtraProps: true,
+      ignoreErrors: false
+    };
+
+    try {
+      const tsProgram: TJS.Program        = TJS.getProgramFromFiles([resolve(filePath)], compilerOptions);
+      const schema: TJS.Definition | null = TJS.generateSchema(tsProgram, typeName, settings);
+
+      return schema;
+    } catch (pErr) {
+      console.error('Could not load json-schema for ' + schemaKey, pErr)
+      throw new Error('Could not load json-schema for ' + schemaKey);
+    }
   }
 
   /**
