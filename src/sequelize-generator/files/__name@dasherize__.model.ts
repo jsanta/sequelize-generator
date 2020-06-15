@@ -130,14 +130,14 @@ export class <%= classify(name) %> extends Model implements I<%= classify(name) 
 
   // Table fields
   public id           : number;
-  public name        ?: string | null;
-  public displayName ?: string | null;
-  public isActive    ?: boolean | null;
+  public name        ?: string;
+  public displayName ?: string;
+  public isActive    ?: boolean;
   // Other fields
 
   public readonly createdAt! : Date;
   public readonly updatedAt! : Date;
-  public readonly deletedAt ?: Date | null;
+  public readonly deletedAt ?: Date;
 
   static associate() {
     // One to many relations
