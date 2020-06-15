@@ -22,7 +22,7 @@ export class T<%= classify(name) %> extends autoImplement<Optional<%= classify(n
   static check(value: any): Promise<boolean> {
     try {
       let result: Promise<boolean>;
-      if (!this.entityValidator || !this.entityValidator.schemaCache.get(schemaKey)) {
+      if (!this.entityValidator || !this.entityValidator.schemaCache.has(schemaKey)) {
         // entityValidator has to be instanced before validating an object
         // Beware: This operation IS SLOW!
         result = _initT<%= classify(name) %>().then(

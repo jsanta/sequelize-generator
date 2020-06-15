@@ -94,7 +94,7 @@ export class EntityValidator {
    */
   check(data: any, schemaKey: string): boolean {
     let schema: any;
-    if (!this.schemaCache.get(schemaKey)) {
+    if (!this.schemaCache.has(schemaKey)) {
       // Must load json schema before 
       throw new Error('Antes de validar se debe cargar el json-schema para: ' + schemaKey);
     } else {
