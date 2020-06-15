@@ -22,7 +22,7 @@ export class T<%= classify(name) %> extends autoImplement<Optional<%= classify(n
   static check(value: any): Promise<boolean> {
     try {
       let result: Promise<boolean>;
-      if (!this.entityValidator || !this.entityValidator.schemaCache[schemaKey]) {
+      if (!this.entityValidator || !this.entityValidator.schemaCache.get(schemaKey)) {
         // entityValidator has to be instanced before validating an object
         // Beware: This operation IS SLOW!
         result = _initT<%= classify(name) %>().then(
@@ -68,7 +68,7 @@ async function _initT<%= classify(name) %>() {
         // (utils.typeClassSchemas).push(schemaPromise);
         // schemaPromise.then(
         //   sp => {
-        //     utils.entityValidator.schemaCache[sp.schemaKey] = sp.schema;
+        //     utils.entityValidator.schemaCache.set(sp.schemaKey, sp.schema);
         //   },
         //   spErr => console.error(spErr)
         // );
@@ -76,7 +76,7 @@ async function _initT<%= classify(name) %>() {
         // Sync schema loading
         // Slow task
         const schema: any = (utils.entityValidator).syncLoadSchema(schemaKey, filePath, typeName);
-        utils.entityValidator.schemaCache[schemaKey] = schema;
+        utils.entityValidator.schemaCache.set(schemaKey, schema);
 
         return T<%= classify(name) %>.entityValidator;
       },

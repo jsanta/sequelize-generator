@@ -13,8 +13,8 @@ import Ajv from 'ajv';
  */
 export class EntityValidator {
   // As the schema loading is a 'expensive' task, it must be run only once
-  // and stores each schema as a key: value pair
-  schemaCache: { [schemaObj: string]: TJS.Definition | null } = {}
+  // and stores each schema as a key: value Map record
+  schemaCache: Map<string, TJS.Definition | null> = new Map();
   
   /**
    * Loads the json schema and places it on the schemaCache Array.
@@ -94,13 +94,13 @@ export class EntityValidator {
    */
   check(data: any, schemaKey: string): boolean {
     let schema: any;
-    if (!this.schemaCache[schemaKey]) {
+    if (!this.schemaCache.get(schemaKey)) {
       // Must load json schema before 
       throw new Error('Antes de validar se debe cargar el json-schema para: ' + schemaKey);
     } else {
       // Using schema cache for schemaKey
       console.log('Usando cache de schema para ', schemaKey);
-      schema = this.schemaCache[schemaKey];
+      schema = this.schemaCache.get(schemaKey);
     }
 
     const ajv: Ajv.Ajv   = new Ajv({ allErrors: true, strictKeywords: 'log', verbose: true });
